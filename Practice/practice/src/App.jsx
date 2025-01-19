@@ -5,26 +5,22 @@ import './App.css';
 
 const App=()=>{
 
-let val1=["fruit","chocolate"]
+// let val1=["fruit","chocolate"]
 
-let [val,setVal]=useState(val1);
-
-const handledOnChange=(event)=>{
-let newVal=event.target.value;
- setVal(newVal);
+let [val,setVal]=useState(0);
+let handledOnClick=(val)=>{
+  setVal(val+1);
 }
+
+
 return(
   <>
   <div className= "container">
-  {/* <h1>{val}</h1> */}
-  <input type="text" placeholder='enter something' onChange={handledOnChange}/>
+  <h1>{val}</h1>
+<p>you clicked {val} times</p>
 
-  <ul>
-  {val1.map((item) => (
-    <li key={item} >{item} </li>
-  ))}
-</ul>
-
+  {/* <button onClick={()=>{setVal(val+1)}}>clicked me</button> */}
+<button onClick={()=>{handledOnClick(val)}}>clicked me</button>
 
 
   </div>
