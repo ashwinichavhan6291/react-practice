@@ -1,21 +1,24 @@
 import React from 'react'
-
+import "./App.css"
 import ChildA from "./Components/ChildA";
 import { createContext } from 'react';
 import { useState } from 'react';
-const UserContext=createContext();
+const themeContext=createContext();
 function App() {
 
- const[user,setUser]=useState({name:"ash"});
+  const[theme,setTheme]=useState("light");
+ 
   return (
     <>
-  <UserContext.Provider value={user}>
-    <ChildA />
-  </UserContext.Provider>
+  <themeContext.Provider value={{theme,setTheme}}>
+    <div className='container' style={{backgroundColor:theme==='light'?"beige":"black"}}>
+    <ChildA></ChildA>
+    </div>
+  </themeContext.Provider>
 </>
 
   )
 }
 
 export default App;
-export {UserContext};
+export {themeContext};
