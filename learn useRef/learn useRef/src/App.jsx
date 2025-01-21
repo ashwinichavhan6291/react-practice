@@ -1,43 +1,44 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { use } from 'react';
+
+import React, { useRef, useState } from 'react'
 
 function App() {
 
-  let[count,setCount]=useState(0);
-  
-  let val=useRef(0);
-  let btnRef=useRef();
+  let[time,setTime]=useState(0);
 
-  function handledOnClick(){
-    val.current=val.current+1;
-    console.log("val " , val.current);
-    setCount(count+1);
+let timerRef=useRef(null);
+  function StartTimer(){
+    timerRef.current=setInterval(()=>{
+     setTime((time)=>time+1);
+    },1000)
   }
-function changeColor(){
-btnRef.current.style.backgroundColor="red";
-}
-  useEffect(()=>{
-    console.log("running");
-  })
 
-  
+  function StopTimer(){
+    clearInterval(timerRef.current);
+    timerRef.current=null;
+  }
+  function ResetTimer(){
+    StopTimer();
+    setTime(0);
+  }
   return (
-    
-    <>
-<div>
-  <button  
-  ref={btnRef}
-  onClick={handledOnClick}>
-    increment
-  </button>
-  <p>count : {count}</p>
-</div>
-<br />
+  <div>
+<h1>StopWatch {time} Seconds</h1>
 
-<button onClick={changeColor}>
-  change color
+<button onClick={StartTimer}>
+  Start
 </button>
-    </>
+<br /><br />
+
+<button onClick={StopTimer}>
+  Stop
+</button>
+<br /><br />
+
+<button onClick={ResetTimer}>
+  Reset
+</button>
+<br /><br />
+  </div>
   )
 }
 
