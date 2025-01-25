@@ -1,0 +1,12 @@
+.container{
+  height:fit-content;
+  border: 2px solid black;
+}
+.AddItem{
+display: flex;
+margin: 20px;
+gap: 20px;
+}
+.item{
+  height: fit-content;
+}
