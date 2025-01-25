@@ -1,0 +1,24 @@
+.form-container{
+  height: fit-content;
+  width: 300px;
+  border: 2px solid black;
+  padding: 20px;
+}
+
+label{
+  font-size: 20px;
+  font-weight: 300;
+  
+   
+}
+input{
+  margin-top: 10px;
+  margin-left: 10px;
+  display: block;
+  height: 20px;
+  width: fit-content;
+
+}
+button{
+  margin: 20px;
+}
