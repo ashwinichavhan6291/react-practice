@@ -1,0 +1,24 @@
+.card-container{
+  /* position:relative; */
+  
+ margin: 10px;
+ width: 400px;
+ height:300px;
+}
+.deleteIcon{
+  width: fit-content;
+  left:95%;
+  top: 0px;
+}
+.alert{
+  margin:10px;
+  /* width:fit-content; */
+}
+.CreatePost{
+
+  width: 500px;
+  margin: 10px;
+  border: 2px solid black;
+  padding: 5px;
+  font-weight: 600;
+}
