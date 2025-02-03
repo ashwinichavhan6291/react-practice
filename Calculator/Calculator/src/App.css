@@ -1,0 +1,31 @@
+.Container{
+  width: 250px;
+  height: 250px;
+  border: 2px solid black;
+} 
+
+input{
+  height: 40px;
+  width:90%;
+  text-align: bold;
+  margin: 20px 0px 10px 10px;
+}
+
+.btnContent{
+
+}
+
+.content{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  
+}
+.btn{
+  width: 45px;
+  height: 40px;
+  margin: 3px;
+  border: 2px solid black;
+  text-align: center;
+  padding: 3px;
+}
