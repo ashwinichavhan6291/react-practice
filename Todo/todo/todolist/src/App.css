@@ -1,12 +1,19 @@
-.container{
-  height:fit-content;
-  border: 2px solid black;
+
+.listData{
+  width: 250px;
+  margin-top: 20px;
 }
-.AddItem{
-display: flex;
-margin: 20px;
-gap: 20px;
+input{
+width: 250px;
+  height: 30px;
 }
-.item{
-  height: fit-content;
+
+.deleteIcon{
+  position: fixed;
+/* display: inline; */
+margin-left: 5rem;
+}
+.editIcon{
+  position: fixed;
+margin-left: 20px;
 }

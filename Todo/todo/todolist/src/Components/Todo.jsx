@@ -1,57 +1,66 @@
-import React, { useState } from 'react'
-import { FaTrashAlt } from "react-icons/fa";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import React, { useState } from "react";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 function Todo() {
+  let [val, setVal] = useState("");
+  let [data, setData] = useState([]);
+  let [togglebtn, setTogglebtn] = useState(true);
+  let [editIndex, setEditIndex] = useState(null);
 
-  // let val1=["ba","ss"];
-let[val,setVal]=useState("");
-let[data,setData]=useState([]);
+  const saveTodo = (e) => {
+    setVal(e.target.value);
+  };
 
-const handleOnChange=(event)=>{
-  setVal(event.target.value);
-}
-const getData=()=>{
-const newData=[...data,val];
-console.log(newData);
-setData(newData);
+  const getData = () => {
+    if (editIndex !== null) {
+      const updatedTodos = [...data];
+      updatedTodos[editIndex] = val;
+      setData(updatedTodos);
+      setEditIndex(null);
+      setTogglebtn(true);
+    } else {
+      setData([...data, val]);
+    }
 
-}
+    setVal("");
+  };
 
+  const deleteData = (index) => {
+    const filteredData = data.filter((_, id) => id !== index);
+    setData(filteredData);
+  };
 
-
-const deleteData=(index)=>{
-const dataFilter=data.filter((currELe,id)=>{
-  return id!==index;
-})
-console.log("dataFilter--",dataFilter);
-setData(dataFilter);
-}
+  const editItem = (index) => {
+    setVal(data[index]);
+    setEditIndex(index);
+    setTogglebtn(false);
+  };
 
   return (
-   <>
+    <>
+      <h1>Todo List</h1>
 
-   <div className="row g-3 container">
-  <div className="col-sm-7 AddItem">
-    <input type="text" className="form-control  item" name={val} placeholder="Item" aria-label="item" onChange={handleOnChange}/>
+      <div className="container">
+        <input type="text" name="listData" onChange={saveTodo} value={val} />
 
+        <button onClick={getData}>{togglebtn ? "Add" : "Update"}</button>
 
-    <IoMdAddCircleOutline onClick={getData}></IoMdAddCircleOutline>
-    {/* <FaTrashAlt onClick={deleteData}></FaTrashAlt> */}
-    
-  </div >
-  {data.map((item, index) => (
-  <div key={index}>{item}
-   <FaTrashAlt onClick={()=>deleteData(index)}></FaTrashAlt>
-  </div>
-))}
-
-  
-  
-</div>
-   
-   </>
-  )
+        <ul className="list-group">
+          {data.map((item, index) => (
+            <li className="list-group-item listData" key={index}>
+              {item}
+              <MdDelete
+                className="deleteIcon"
+                onClick={() => deleteData(index)}
+              />
+              <FaEdit className="editIcon" onClick={() => editItem(index)} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
 }
 
-export default Todo
+export default Todo;
