@@ -10,6 +10,9 @@
 .delete {
   margin-left: 250px;
 }
+.edit {
+  margin-left: 15px;
+}
 .inputContainer {
   display: flex;
 }

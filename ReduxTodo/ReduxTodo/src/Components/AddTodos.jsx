@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
-import { addTodo, removeTodo } from "../features/TodoSlice";
+import { MdEditDocument } from "react-icons/md";
+import { addTodo, removeTodo, updateTodo } from "../features/TodoSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function AddTodos() {
   let [input, setInput] = useState("");
+  let [editId, setEditId] = useState(null);
   const todos = useSelector((state) => state.todo?.todos || []);
   const dispatch = useDispatch();
 
@@ -19,17 +21,25 @@ function AddTodos() {
     savedTodos.forEach((todo) => {
       dispatch(addTodo(todo.text));
     });
-  }, [dispatch]);
+  }, []);
 
   const handleAdd = () => {
-    if (input === "") {
-      alert("Please Add Something");
+    if (editId) {
+      dispatch(updateTodo({ id: editId, text: input }));
+      setEditId(null);
     } else {
       dispatch(addTodo(input));
       setInput("");
     }
   };
 
+  const handleEdit = (id) => {
+    const todoEdit = todos.find((todo) => todo.id === id);
+    if (todoEdit) {
+      setInput(todoEdit.text);
+      setEditId(id);
+    }
+  };
   const handleRemoveTodo = (id) => {
     dispatch(removeTodo(id));
   };
@@ -46,7 +56,7 @@ function AddTodos() {
           onChange={(e) => setInput(e.target.value)}
         ></input>
         <button type="submit" onClick={handleAdd} className="btn btn-dark  btn">
-          Add
+          {editId ? "Update" : "Add"}
         </button>
       </div>
       <div className="listData">
@@ -58,6 +68,10 @@ function AddTodos() {
               <FaTrash
                 className="delete"
                 onClick={() => handleRemoveTodo(todo.id)}
+              />
+              <MdEditDocument
+                className="edit"
+                onClick={() => handleEdit(todo.id)}
               />
             </li>
           ))}
