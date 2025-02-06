@@ -1,0 +1,19 @@
+.listData {
+  margin-top: 10px;
+}
+
+.container {
+  margin: 50px;
+  width: 400px;
+}
+
+.delete {
+  margin-left: 250px;
+}
+.inputContainer {
+  display: flex;
+}
+.btn {
+  margin-left: 2px;
+  width: 80px;
+}
