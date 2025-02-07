@@ -5,6 +5,7 @@ import RandomUsers from "./Components/RandomUsers";
 import axios from 'axios';
 function App() {
   let [data, setData] = useState(null);
+  let[posts,setPosts]=useState(null);
   let [RandomUser, setRandomUser] = useState(null);
 
   const getPosts= async () =>{
@@ -13,10 +14,27 @@ function App() {
     setData(response.data)
   }
 
+  const postData = async () => {
+    try {
+      const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+        userId: 1,
+        title: "cooking",
+        body: "cooking"
+      });
   
+     setPosts("Response:", response); 
+    } catch (error) {
+      console.error("Error posting data:", error);
+    }
+  };
+    useEffect(() => {
+      
+      postData();
+    }, []);
 
   useEffect(() => {
     getPosts();
+  
   }, []);
  
 
