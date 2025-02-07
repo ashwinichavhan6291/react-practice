@@ -2,22 +2,23 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PostCard from "./Components/PostCard";
 import RandomUsers from "./Components/RandomUsers";
-
+import axios from 'axios';
 function App() {
   let [data, setData] = useState(null);
   let [RandomUser, setRandomUser] = useState(null);
 
-  const getPosts = async () => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-    const post = await response.json();
-    setData(post);
-  };
+  const getPosts= async () =>{
+    const response=await axios.get('https://jsonplaceholder.typicode.com/posts');
+  
+    setData(response.data)
+  }
+
+  
 
   useEffect(() => {
     getPosts();
   }, []);
-  //   getPosts().then((posts) => setData(posts));
-  // }, []);
+ 
 
   const getRandomData = async () => {
     const response = await fetch("https://randomuser.me/api/");
