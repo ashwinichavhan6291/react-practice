@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { getPosts } from "./api/fetch";
 
 function App() {
   let [data, setData] = useState(null);
 
   useEffect(() => {
-    getPosts().then((posts) => setData(posts));
+    const getPosts = async () => {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
+      const post = await response.json();
+      setData(post);
+    };
+    getPosts();
   }, []);
+  //   getPosts().then((posts) => setData(posts));
+  // }, []);
 
   return (
     <div>
       <ul>
-        {data ? (
-          data.map((val) => <li key={val.id}>{val.title}</li>)
-        ) : (
-          <p>No data</p>
-        )}
+        <ul>
+          {data ? (
+            data.map((val) => <li key={val.id}>{val.title}</li>)
+          ) : (
+            <li>No data</li>
+          )}
+        </ul>
       </ul>
     </div>
   );
