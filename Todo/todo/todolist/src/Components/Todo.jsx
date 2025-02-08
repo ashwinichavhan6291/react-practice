@@ -12,7 +12,7 @@ function Todo() {
     setVal(e.target.value);
   };
 
-  const getData = () => {
+   const getData = () => {
     if (editIndex !== null) {
       const updatedTodos = [...data];
       updatedTodos[editIndex] = val;
@@ -22,8 +22,7 @@ function Todo() {
     } else {
       setData([...data, val]);
     }
-
-    setVal("");
+setVal("");
   };
 
   const deleteData = (index) => {
@@ -31,6 +30,7 @@ function Todo() {
     setData(filteredData);
   };
 
+   
   const editItem = (index) => {
     setVal(data[index]);
     setEditIndex(index);
