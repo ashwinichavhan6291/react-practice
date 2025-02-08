@@ -1,10 +1,29 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { useEffect } from "react";
 function App() {
   let [item, setItem] = useState("");
   let [val, setVal] = useState([]);
   let [isEditId, setEditId] = useState(null);
+
+
+
+
+
+  useEffect(()=>{
+    if(val.length>0) {
+    localStorage.setItem("items",JSON.stringify(val));
+    }
+  },[val])
+
+  useEffect(()=>{
+const items=JSON.parse(localStorage.getItem('items'));
+
+if(items){
+  setVal(items);
+}
+  },[])
 
   const handleOnChange = (e) => {
     setItem(e.target.value);
