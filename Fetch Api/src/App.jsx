@@ -2,15 +2,20 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PostCard from "./Components/PostCard";
 import RandomUsers from "./Components/RandomUsers";
+import LoadingSpinner from "./Components/LoadingSpinner";
 import axios from 'axios';
+
+
 function App() {
   let [data, setData] = useState(null);
   let[posts,setPosts]=useState(null);
+  let[spinner,setSpinner]=useState(false);
   let [RandomUser, setRandomUser] = useState(null);
 
   const getPosts= async () =>{
+    setSpinner(true);
     const response=await axios.get('https://jsonplaceholder.typicode.com/posts');
-  
+    setSpinner(false);
     setData(response.data)
   }
 
@@ -33,7 +38,9 @@ function App() {
     }, []);
 
   useEffect(() => {
+    
     getPosts();
+    
   
   }, []);
  
@@ -53,6 +60,7 @@ function App() {
   };
   return (
     <div>
+        {spinner &&<LoadingSpinner/> }
       {RandomUser && <RandomUsers data={RandomUser} refresh={refresh} />}
 
       <ul>
@@ -60,7 +68,7 @@ function App() {
           {data ? (
             data.map((val) => <PostCard title={val.title} body={val.body} />)
           ) : (
-            <li>No data</li>
+             <p>No data</p>
           )}
         </ul>
       </ul>
