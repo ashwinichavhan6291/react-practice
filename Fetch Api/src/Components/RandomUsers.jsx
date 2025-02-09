@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Link} from 'react-router-dom'
 
 function RandomUsers() {
   let [RandomUser, setRandomUser] = useState(null);
@@ -21,8 +22,12 @@ function RandomUsers() {
 
   return (
     <>
+
+
       {data && (
         <div class="card">
+<Link to="/post" class="btn btn-dark" style={{width: "100px",margin:"30px"}} >PostCard</Link>
+         
           <div class="card-header">Featured</div>
           <div class="card-body">
             <img src={data.picture.large} alt="" />
@@ -35,6 +40,8 @@ function RandomUsers() {
           </div>
         </div>
       )}
+
+     
     </>
   );
 }

@@ -35,7 +35,7 @@ const postData = async () => {
 
        
     
-    <Outlet/>
+     {/* <Outlet/> */}
    
     </div>
   );

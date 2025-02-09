@@ -12,6 +12,7 @@ function PostCard() {
     );
     setSpinner(false);
     setData(response.data);
+   
   };
 
   useEffect(() => {
@@ -24,7 +25,8 @@ function PostCard() {
       {data ? (
         data.map((val) => (
           <div class="card">
-            <div class="card-header">Featured</div>
+            <div class="card-header"> userId : {val.id
+            }</div>
             <div class="card-body">
               <h5 class="card-title">{val.title}</h5>
               <p class="card-text">{val.body}</p>
