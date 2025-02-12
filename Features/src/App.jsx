@@ -2,6 +2,7 @@ import React from 'react'
 import Checkboxes from './Components/Checkboxes'
 import Radiobtn from './Components/Radiobtn'
 import useToggle from './Components/useToggle';
+import SearchText from './Components/SearchText';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
 
       <Checkboxes/>
       <Radiobtn/>
+      <SearchText></SearchText>
 
       <hr />
 

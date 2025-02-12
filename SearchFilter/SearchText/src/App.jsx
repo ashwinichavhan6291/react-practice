@@ -23,7 +23,7 @@ let[text,setText]=useState("");
       return item;
     }
   }).map((val) => {
-    return <p key={val}>{val}</p>;
+     <p key={val}>{val}</p>;
   })}
 </div>
 
