@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 function SearchText() {
-  let [text, setText] = useState([]);
+  let [text, setText] = useState("");
   const Country = [
     "Angola",
     "Antigua",

@@ -5,6 +5,7 @@ import useToggle from './Components/useToggle';
 import SearchText from './Components/SearchText';
 
 
+
 function App() {
 
   let[val,toggleval]=useToggle(true);
@@ -13,7 +14,8 @@ function App() {
 
       <Checkboxes/>
       <Radiobtn/>
-      <SearchText></SearchText>
+      <SearchText/>
+     
 
       <hr />
 
