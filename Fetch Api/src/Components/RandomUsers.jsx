@@ -28,13 +28,13 @@ function RandomUsers() {
         <div class="card">
 <Link to="/post" class="btn btn-dark" style={{width: "100px",margin:"30px"}} >PostCard</Link>
          
-          <div class="card-header">Featured</div>
-          <div class="card-body">
+          <div className="card-header">Featured</div>
+          <div className="card-body">
             <img src={data.picture.large} alt="" />
-            <h5 class="card-title">{data?.name?.first}</h5>
+            <h5 className="card-title">{data?.name?.first}</h5>
             <div>{data?.phone}</div>
-            <div class="card-text">{data?.location.country}</div>
-            <a href="#" class="btn btn-primary" onClick={refresh}>
+            <div className="card-text">{data?.location.country}</div>
+            <a href="#" className="btn btn-primary" onClick={refresh}>
               Click
             </a>
           </div>

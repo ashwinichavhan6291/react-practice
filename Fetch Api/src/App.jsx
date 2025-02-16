@@ -5,6 +5,7 @@ import RandomUsers from "./Components/RandomUsers";
 import LoadingSpinner from "./Components/LoadingSpinner";
 import axios from 'axios';
 import { Outlet } from "react-router-dom";
+import "./App.css"
 
 
 function App() {
@@ -35,7 +36,6 @@ const postData = async () => {
 
        
     
-     {/* <Outlet/> */}
    
     </div>
   );
