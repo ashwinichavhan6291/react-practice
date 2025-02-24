@@ -1,5 +1,9 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { addUser } from '../slice/userslice';
+import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from "react-toastify";
 
 function Login() {
 
@@ -11,24 +15,46 @@ function Login() {
         }=useForm();
 
     let[login,setLogin]=useState(false);
-    const handleLogin=(data)=>{
-        setLogin(true);
-        console.log(data);
+
+    const dispatch=useDispatch();
+
+    const handleLogin=async(data)=>{
+      try{
+        console.log("data",data);
+        const response=await axios.post("http://localhost:7777/login",
+          data,
+         { method: "POST",
+        withCredentials:true}
+        );
+        console.log("response", response.data);
+        
+        dispatch(addUser(response.data));
+        toast.success("login successfully",{
+          position:"top-right",
+          autoclose:1000,
+        });
+setLogin(true);
+      }
+      catch(err){
+console.error(err.message);
+toast.error("failed to login")
+      }
+
+        
     }
   return (
     <>
+       <ToastContainer />
     {!login &&
     <form onSubmit={handleSubmit(handleLogin)} className='formContainer'>
-<div className='cancel-icon'>
-      {/* <MdCancelPresentation  ></MdCancelPresentation>  */}
-      </div>
-    <h2 className='signupHeading'>SignUp</h2>
+
+    <h2 className='signupHeading'>LogIn</h2>
   
   
   <div className="row mb-3">
     
     <div className="col-sm-10 inputData">
-    <input type="password " className="form-control inputField" id="inputEmail3" {...register("password")} 
+    <input type="password" className="form-control inputField"  {...register("password")} 
       placeholder="Enter Password"
     />
     
@@ -36,7 +62,7 @@ function Login() {
     </div>
   </div>
   <div className="col-sm-10">
-      <input type="email " className="form-control inputField" id="inputEmail3" {...register("email")} placeholder='Enter Email Address'/>
+      <input type="email" className="form-control inputField"  {...register("emailId")} placeholder='Enter Email Address'/>
 
     
     </div>

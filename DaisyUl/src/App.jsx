@@ -1,38 +1,35 @@
-import React, { useState } from 'react'
-import HomePage from './components/HomePage'
-import Header from './components/Header'
+import React, { useState } from "react";
+import HomePage from "./components/HomePage";
+import Header from "./components/Header";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import './App.css'
-import Footer from './components/Footer'
-import Signup from './components/Signup'
-import Login from './components/Login'
-import UserCard from './components/UserCard'
+import "./App.css";
+import Footer from "./components/Footer";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 
 function App() {
+  let [showSignup, setShowSignup] = useState(false);
+  let [showLogin, setShowLogin] = useState(false);
 
-  let[showSignup,setShowSignup]=useState(false);
-  let[showLogin,setShowLogin]=useState(false);
-  let[showUser,setShowUser]=useState(false);
-
-
-  
   return (
     <>
-    <Header  setShowSignup={setShowSignup} setShowLogin={setShowLogin} setShowUser={setShowUser} showUser={showUser} showLogin={showLogin} showSignup={showSignup}></Header>
-    <HomePage />
-    {showSignup &&
-    <Signup onClose={()=>showSignup(false)} />
-  
-}
-{showLogin &&
-  <Login onClose={()=>setShowLogin(false)}/>
-}
-{showUser &&
-<UserCard  onClose={()=>setShowUser(false)}/>
-}
-    <Footer></Footer>
+      <ToastContainer position="top-right" autoClose={3000} />
+      <Header
+        setShowSignup={setShowSignup}
+        setShowLogin={setShowLogin}
+        showLogin={showLogin}
+        showSignup={showSignup}
+      ></Header>
+      <HomePage />
+
+      {showSignup && <Signup />}
+      {showLogin && <Login />}
+
+      <Footer></Footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

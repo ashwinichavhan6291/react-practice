@@ -7,8 +7,11 @@ function UserCard() {
  const getUser=async()=>{
   const response= await  fetch("https://randomuser.me/api/");
   const data=await response.json();
-  setUser((data.results[0]));
-  console.log((data.results[0]));
+  console.log(data);
+  setUser((data.results
+    [0]));
+  console.log((data.results
+    [0]));
  }
 
 useEffect(() => {
@@ -17,12 +20,15 @@ useEffect(() => {
 
  const handleOnClick=()=>{
  
-    getUser().then((val)=> setUser(val.results[0]));
+    getUser().then((val)=> setUser(val.results
+      [0]));
     
  }
 
   return (
   <>
+
+  
   {User &&
   <div className="card bg-base-100 w-96 shadow-xl userCardContainer">
   <figure className="px-10 pt-10">

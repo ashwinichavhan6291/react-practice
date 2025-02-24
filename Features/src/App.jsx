@@ -3,6 +3,8 @@ import Checkboxes from './Components/Checkboxes'
 import Radiobtn from './Components/Radiobtn'
 import useToggle from './Components/useToggle';
 import SearchText from './Components/SearchText';
+import Button from './Components/button';
+
 
 
 
@@ -15,6 +17,7 @@ function App() {
       <Checkboxes/>
       <Radiobtn/>
       <SearchText/>
+      <Button></Button>
      
 
       <hr />
