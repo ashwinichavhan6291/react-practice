@@ -1,53 +1,67 @@
-import React, { useEffect, useState } from 'react'
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-function UserCard() {
-
-    let[User,setUser]=useState("");
-
- const getUser=async()=>{
-  const response= await  fetch("https://randomuser.me/api/");
-  const data=await response.json();
-  console.log(data);
-  setUser((data.results
-    [0]));
-  console.log((data.results
-    [0]));
- }
-
-useEffect(() => {
-    getUser();
-}, []);
-
- const handleOnClick=()=>{
- 
-    getUser().then((val)=> setUser(val.results
-      [0]));
-    
- }
-
-  return (
-  <>
+const UserCard = ({userData,userCard}) => {
+  const [users, setUsers] = useState([]); 
+  const [currentIndex, setCurrentIndex] = useState(0); 
 
   
-  {User &&
-  <div className="card bg-base-100 w-96 shadow-xl userCardContainer">
-  <figure className="px-10 pt-10">
-    <img
-      src={User.picture.large}
-      alt="Picture"
-      className="rounded-xl" />
-  </figure>
-  <div className="card-body items-center text-center">
-    <h2 className="card-title">{User.name.first } {User.name.last}</h2>
-    <p>{User.location.state} {User.location.country}</p>
-    <div className="card-actions">
-      <button className="btn btn-primary" onClick={handleOnClick}>users</button>
-    </div>
-  </div>
-</div>
-}
-  </>
-  )
-}
+//    const fetchUser=async()=>{
+//     try{
 
-export default UserCard
+//       const res=await axios.get("http://localhost:7777/feed",
+//         {withCredentials:true}
+//       );
+
+    
+//         setUsers(res.data.data);
+      
+//       }
+     
+
+    
+//     catch(err){
+//       console.error(err.response ? err.response.data : err.message);
+//     }
+//    }
+//   useEffect(()=>{
+//     fetchUser();
+//   },[])
+
+//  const handleNextUser=()=>{
+  
+//   setCurrentIndex((prev)=> (prev+1)% users.length);
+//  }
+  
+//   const user=users[currentIndex];
+ 
+  return (
+    <>
+   {userCard &&
+      
+        <div className="card bg-base-100 w-96 shadow-xl h-3/5">
+          <figure className="px-10 pt-10">
+           
+              <img
+                src={userData.photourl}
+                alt="User Picture"
+                className="rounded-xl h-64"
+              />
+            
+          </figure>
+          <div className="card-body items-center text-center">
+            <h2 className="card-title">{userData.firstName} {userData.lastName}</h2>
+            <p>{Array.isArray(userData.skills) ? userData.skills.join(", ") : userData.skills}</p>
+            <p>{userData.age} {userData.gender}</p>
+            
+            <p>{userData.about}</p>
+            
+          </div>
+        </div>
+}
+      
+    </>
+  );
+};
+
+export default UserCard;

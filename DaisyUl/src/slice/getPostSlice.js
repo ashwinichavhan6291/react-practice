@@ -8,12 +8,9 @@ export const getPostSlice=createSlice({
         addData:(state,action)=>{
             return action.payload;
         },
-        removeData: (state,action)=>{
-            const{_id}=action.payload;
-
-            return state.filter((post)=>  post._id!==_id);
-
-        }
+        removeData: (state, action) => {
+            return state.filter(post => post._id !== action.payload._id);
+          }
     }
 })
 export const{addData,removeData}=getPostSlice.actions;

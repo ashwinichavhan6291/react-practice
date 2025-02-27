@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../slice/userslice";
+import { ToastContainer, toast } from "react-toastify";
 
 
 const Signup = () => {
@@ -26,15 +27,16 @@ const Signup = () => {
         { credentials: "include" }
       );
 dispatch(addUser(res.data))
-      console.log("Response:", res.data);
+      toast.success(res.data);
       setIsSubmitted(true);
     } catch (err) {
-      console.error("Error:", err.response ? err.response.data : err.message);
+      toast.error("Error:", err.response ? err.response.data : err.message);
     }
   };
 
   return (
     <>
+        <ToastContainer />
       {!submitted && (
         <form className="formContainer" onSubmit={handleSubmit(handleOnSubmit)}>
           <h2 className="signupHeading">SignUp</h2>

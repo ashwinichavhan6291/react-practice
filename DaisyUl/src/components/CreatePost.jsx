@@ -85,6 +85,9 @@ function CreatePost() {
               className="file-input file-input-bordered w-full max-w-xs"
               onChange={(e) => setPostContent(e.target.value)}
             />
+            {postContent.length>100&& 
+            <p style={{ color:"red",fontWeight:"700"}}>text length should not be more than 100</p>
+            }
             <br />
           </div>
           <button

@@ -6,20 +6,22 @@ function Header({setShowSignup,setShowLogin,showLogin,showSignup}) {
   return (
     <>
     
-    <div className="navbar bg-neutral text-neutral-content" style={{position: "fixed"}}>
-  <button className="btn btn-ghost text-xl">Demo</button>
+    <div className="navbar bg-neutral text-neutral-content" style={{position: "fixed",zIndex:"1"}}>
+  <button className="btn bg-slate-600 text-2xl hover:bg-green-500 font-bold ">
+    <Link to="/profile">User</Link>
+  </button>
 
-  <div className='listContainer flex justify-between items-center ml-auto list-none '>
+  <div className='listContainer flex justify-between items-center  list-none ml-auto'>
 
-  <Link to="/createpost">
-  <li className="btn btn-ghost text-xl " >create post</li></Link>
+  <Link to="/createpost" >
+  <li className="text-gray-100 text-xl hover:text-red-300 ml-10" >create post</li></Link>
 
  <Link to="/post">
- <li className="btn btn-ghost text-xl" >Post</li>
+ <li className="text-gray-100 text-xl hover:text-red-300  ml-10" >Post</li>
  </Link> 
-  <button className="btn btn-ghost text-xl px-2 "onClick={()=>setShowLogin(!showLogin)}>Log In</button>
+  <button className=" text-gray-100 text-xl hover:text-red-300 ml-10"onClick={()=>setShowLogin(!showLogin)}>Log In</button>
    
-   <button className="btn btn-ghost text-xl"onClick={()=>setShowSignup(!showSignup)}>Sign up</button>
+   <button className="text-gray-100 text-xl hover:text-red-300 ml-10 "onClick={()=>setShowSignup(!showSignup)}>Sign up</button>
 
    
   </div>

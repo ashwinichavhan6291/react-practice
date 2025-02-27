@@ -29,22 +29,14 @@
         margin-top: 20px
     }
     .userCardContainer{
-        position: fixed;
+        position:relative;
         top: 90px;
         left: 400px;
         background-color: grey;
         color: white;
     }
-    .frontImage{
-        margin-left: 55%;
-        box-shadow:5px 10px 20px 10px black;
-        border-radius: 15px 50px 30px 5px;
-        position: absolute;
-        z-index: -1;
-        
-
-    }
-    .createPost{
+    
+    .createPost {
         background-color: white;
     top: 4rem;
         left: 40%; 
@@ -55,10 +47,13 @@
         border: 2px solid black;
         border-radius: 10px;
         box-shadow: 60px -10px teal;
-        font-size: 20px;
-        font-weight: 700;
+       
+       
  }
-
+.createPost label{
+    font-weight: 700;
+    font-size: 20px;
+}
  .createPostContainer{
     margin: 10px 10px 10px 10px;
     

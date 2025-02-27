@@ -29,22 +29,22 @@ function Login() {
         console.log("response", response.data);
         
         dispatch(addUser(response.data));
-        toast.success("login successfully",{
+        toast.success(response.data,{
           position:"top-right",
           autoclose:1000,
         });
 setLogin(true);
       }
       catch(err){
-console.error(err.message);
-toast.error("failed to login")
+toast.error(err.response ? err.response.data : err.message);
+
       }
 
         
     }
   return (
     <>
-       <ToastContainer />
+   
     {!login &&
     <form onSubmit={handleSubmit(handleLogin)} className='formContainer'>
 

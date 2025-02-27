@@ -25,8 +25,31 @@ const dispatch=useDispatch();
 
   }
 
+  const deletePost=async(_id)=>{
+    if (!_id) {
+      console.error("Error: No post ID provided");
+      return;
+    }
+    try{
+      const res=await axios.delete(`http://localhost:7777/deletePost/${_id}`,
+        {withCredentials:true}
+      );
+      console.log(res.data);
+      dispatch(removeData({_id}));
+
+
+    }
+    catch(err){
+      console.error("ERROR " , err.message);
+      
+    }
+    
+
+
+  }
   useEffect(()=>{
     getPost();
+    deletePost();
   },[])
   
   return (
@@ -36,14 +59,14 @@ const dispatch=useDispatch();
            <div key={post._id} className="card bg-base-100 w-96 shadow-xl"     style={{top: "100px" }}>
            <figure>
                <img
-               src={post.postImage} style={{height: "300px",width:"100%"}}
+               src={post.postImage} style={{height: "250px",width:"100%"}}
                alt="Shoes" />
              </figure>
       <div className="card-body">
     <h2 className="card-title">{post.postTitle}</h2>
-    <p>{post.postContent}</p>
+    <p style={{overflow:"auto",wordWrap: "break-word",overflowWrap:"break-word"}}>{post.postContent}</p>
     <div className="card-actions justify-end">
-      <button className="btn btn-primary" onClick={()=>dispatch(removeData({_id:post._id}))}>Delete Post</button>
+      <button className="btn btn-primary" onClick={()=>deletePost(post._id)}>Delete Post</button>
     </div>
   </div>
 </div>
