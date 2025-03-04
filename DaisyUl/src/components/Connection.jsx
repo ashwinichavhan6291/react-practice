@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { addConnection } from '../slice/connection';
 import { toast ,ToastContainer} from 'react-toastify';
+import { Base_URL } from '../slice/constants';
 
 
 function Connection() {
@@ -13,7 +14,7 @@ function Connection() {
   const dispatch=useDispatch();
   const fetchConnection=async()=>{
     try{
-   const res=await axios.get("http://localhost:7777/user/connections",
+   const res=await axios.get(Base_URL+"/user/connections",
     {withCredentials :true}
    );
    dispatch(addConnection(res.data.data))

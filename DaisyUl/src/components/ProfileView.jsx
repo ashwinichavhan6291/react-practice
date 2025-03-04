@@ -1,6 +1,7 @@
 import React, { useState,useEffect} from 'react'
 import axios from 'axios';
 import { toast ,ToastContainer} from 'react-toastify';
+import { Base_URL } from '../slice/constants';
 
 function ProfileView() {
 
@@ -8,7 +9,7 @@ function ProfileView() {
   const fetchProfile=async()=>{
     try{
 
-      const res=await axios.get("http://localhost:7777/profile/view",
+      const res=await axios.get(Base_URL+"/profile/view",
         {withCredentials:true}
       )
       setProfile(res.data);

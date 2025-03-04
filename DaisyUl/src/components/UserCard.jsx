@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addFeed, removeFeed } from '../slice/feedSlice';
 import { ToastContainer, toast } from "react-toastify";
 import { motion, AnimatePresence } from 'framer-motion';
+import { Base_URL } from '../slice/constants';
 
 function UserCard() {
     let [currIndex, setCurrIndex] = useState(0);
@@ -12,7 +13,7 @@ function UserCard() {
 
     const handleFeed = async () => {
         try {
-            const res = await axios.get("http://localhost:7777/feed", { withCredentials: true });
+            const res = await axios.get(Base_URL+"/feed", { withCredentials: true });
             dispatch(addFeed(res.data.data));
             console.log(res.data.data);
         } catch (err) {
@@ -27,7 +28,7 @@ function UserCard() {
     const handleRequest = async (status, userId) => {
         try {
             const res = await axios.post(
-                `http://localhost:7777/request/send/${status}/${userId}`,
+                `${Base_URL}/request/send/${status}/${userId}`,
                 {},
                 { headers: { "Content-Type": "application/json" }, withCredentials: true }
             );

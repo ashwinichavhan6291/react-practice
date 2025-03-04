@@ -1,10 +1,11 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { addUser } from '../slice/userslice';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Profile from './Profile';
 import { ToastContainer, toast } from "react-toastify";
+import { Base_URL } from '../slice/constants';
 
 
 
@@ -29,7 +30,7 @@ function ProfileEdit() {
       setProfile(false);
       const requestData={firstName,lastName,gender,age,photourl,skills,about}
       
-      const res=await axios.post("http://localhost:7777/profile/edit", 
+      const res=await axios.post(Base_URL+"/profile/edit", 
      requestData,
      { 
       withCredentials: true, 

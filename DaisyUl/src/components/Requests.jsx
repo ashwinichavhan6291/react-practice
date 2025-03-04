@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addRequest, removeRequest } from '../slice/requestSlice';
 import { toast ,ToastContainer} from 'react-toastify';
 import axios from 'axios';
+import { Base_URL } from '../slice/constants';
 
 
 function Requests() {
@@ -14,7 +15,7 @@ function Requests() {
   const viewRequest=async()=>{
     try{
 
-      const res=await axios.get(`http://localhost:7777/user/request/received` ,
+      const res=await axios.get(`${Base_URL}/user/request/received` ,
       
         {withCredentials :true}
       )
@@ -36,7 +37,7 @@ dispatch(addRequest(res.data.data));
     
     
       const res = await axios.post(
-        `http://localhost:7777/request/review/${status}/${_id}`,
+        `${Base_URL}/request/review/${status}/${_id}`,
         {},
         {
           headers: { "Content-Type": "application/json" },

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
 import {addData,removeData}  from '../slice/getPostSlice';
 import axios from 'axios';
+import { Base_URL } from '../slice/constants';
 
 
 
@@ -15,7 +16,7 @@ const dispatch=useDispatch();
 
   const getPost=async()=>{
 
-    const res=await axios.get("http://localhost:7777/getPost",{
+    const res=await axios.get(Base_URL+"/getPost",{
       withCredentials:true
     });
  
@@ -31,7 +32,7 @@ const dispatch=useDispatch();
       return;
     }
     try{
-      const res=await axios.delete(`http://localhost:7777/deletePost/${_id}`,
+      const res=await axios.delete(`${Base_URL}/deletePost/${_id}`,
         {withCredentials:true}
       );
       

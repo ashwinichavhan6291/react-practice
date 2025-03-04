@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../slice/postSlice";
 import { useNavigate } from "react-router-dom";
+import { Base_URL } from "../slice/constants";
 
 function CreatePost() {
   const posts = useSelector((store) => store.post);
@@ -23,7 +24,7 @@ function CreatePost() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:7777/post",
+        Base_URL+"/post",
         { postTitle, postImage, postContent },
         {
           headers: { "Content-Type": "application/json" },

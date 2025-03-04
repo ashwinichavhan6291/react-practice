@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../slice/userslice";
 import { ToastContainer, toast } from "react-toastify";
 import { motion } from "framer-motion";
+import { Base_URL } from "../slice/constants";
 
 const Signup = () => {
   const [submitted, setIsSubmitted] = useState(false);
@@ -18,7 +19,7 @@ const Signup = () => {
 
   const handleOnSubmit = async (formData) => {
     try {
-      const res = await axios.post("http://localhost:7777/signup", formData, {
+      const res = await axios.post( Base_URL+"/signup", formData, {
         credentials: "include",
       });
       dispatch(addUser(res.data));

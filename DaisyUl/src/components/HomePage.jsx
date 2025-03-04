@@ -3,12 +3,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { motion } from 'framer-motion';
+import { Base_URL } from '../slice/constants';
 
 function HomePage() {
   const handleLogout = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:7777/logout",
+        Base_URL +"/logout",
         {},
         { withCredentials: true }
       );

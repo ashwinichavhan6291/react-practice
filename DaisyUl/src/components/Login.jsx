@@ -5,9 +5,11 @@ import { addUser } from "../slice/userslice";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
+import { Base_URL } from "../slice/constants";
 
 function Login() {
   const [newPassword, setNewPassword] = useState("");
+  const[login,setLogin]=useState(false);
   const [emailId, setEmailId] = useState("");
   const [passwordPage, setPasswordPage] = useState(false);
   const dispatch = useDispatch();
@@ -16,15 +18,17 @@ function Login() {
 
   const handleLogin = async (data) => {
     try {
-      const response = await axios.post("http://localhost:7777/login", data, {
+      const response = await axios.post(Base_URL +"/login", data, {
         withCredentials: true,
       }); 
 
       dispatch(addUser(response.data));
+     
       setEmailId(data.emailId);
       setValue("emailId", data.emailId);
 
       toast.success("Login successful!", { position: "top-right", autoClose: 1000 });
+      setLogin(true);
     } catch (err) {
       toast.error(err.response?.data || err.message);
     }
@@ -33,7 +37,7 @@ function Login() {
   const handlePassword = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:7777/profile/password", { password: newPassword, emailId });
+      const res = await axios.post(Base_URL+"/profile/password", { password: newPassword, emailId });
       toast.success(res.data);
       setNewPassword("");
     } catch (err) {
@@ -42,6 +46,9 @@ function Login() {
   };
 
   return (
+    <>
+    <ToastContainer />
+    {!login &&
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 to-purple-600">
       <motion.form
         onSubmit={handleSubmit(handleLogin)}
@@ -56,7 +63,7 @@ function Login() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {passwordPage ? "Reset Password" : "Log In"}
+          {passwordPage  ? "Reset Password" : "Log In"}
         </motion.h2>
 
         <AnimatePresence mode="wait">
@@ -104,7 +111,7 @@ function Login() {
               <p className="text-gray-200 mt-4">
                 Forgot password?{" "}
                 <motion.button
-                  className="btn-ghost text-pink-400 underline"
+                  className="btn-ghost text-black underline"
                   onClick={(e) => { e.preventDefault(); setPasswordPage(true); }}
                   whileHover={{ scale: 1.1 }}
                 >
@@ -125,7 +132,8 @@ function Login() {
                   type="email"
                   className="form-control inputField w-full px-4 py-2 rounded-md bg-white/20 text-white border border-white/30 placeholder-gray-200 focus:ring-2 focus:ring-indigo-300 outline-none"
                   value={emailId}
-                  readOnly
+                  onChange={(e) => setEmailId(e.target.value)}
+                 
                 />
               </div>
 
@@ -158,12 +166,16 @@ function Login() {
                 Back to Login
               </motion.button>
             </motion.div>
+          
           )}
         </AnimatePresence>
       </motion.form>
-
-      <ToastContainer />
+    
+      
     </div>
+}
+    </>
+    
   );
 }
 
