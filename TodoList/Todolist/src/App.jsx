@@ -43,7 +43,7 @@ if(items){
 
   const deleteData = (index) => {
     const deleteItem = val.filter((_, id) => id !== index);
-    console.log(deleteItem);
+
     setVal(deleteItem);
   };
 

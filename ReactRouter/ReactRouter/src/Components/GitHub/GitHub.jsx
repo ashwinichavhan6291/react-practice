@@ -4,8 +4,7 @@ import { useLoaderData } from 'react-router-dom'
 function GitHub() {
 
     const data=useLoaderData("");
-    console.log(data);
-
+ 
     
   return (
     <div className='text-center m-5 p-4 bg-gray-700 text-white text-3xl'>Github login : {data.login}

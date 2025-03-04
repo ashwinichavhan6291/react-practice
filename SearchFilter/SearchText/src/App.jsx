@@ -6,7 +6,7 @@ let[text,setText]=useState("");
 
   const handleChange =(e)=>{
     setText(e.target.value);
-    console.log(e.target.value);
+  
   }
   return (
     <div className='container'>

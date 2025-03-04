@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import HomePage from "./components/HomePage";
 import Header from "./components/Header";
-import { ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 
 
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={3000} />
+      
       <Header
         setShowSignup={setShowSignup}
         setShowLogin={setShowLogin}

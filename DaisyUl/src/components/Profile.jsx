@@ -1,164 +1,36 @@
 
-import React, { useEffect, useState } from 'react'
-import { addUser } from '../slice/userslice';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import UserCard from './UserCard';
-import { ToastContainer, toast } from "react-toastify";
-
-
-
-function Profile() {
-  const user=useSelector((store)=>store.user);
-
-    const dispatch=useDispatch();
-   let[firstName,setFirstName]=useState(user.firstName);
-   let[lastName,setLastName]=useState(user.lastName);
-   let[about,setAbout]=useState(user.about);
-   let[gender,setGender]=useState(user.gender);
-   let[age,setAge]=useState(user.age);
-   let[photourl,setPhotourl]=useState(user.photourl);
-   let[skills,setSkills]=useState(user.skiils);
-   let[userCard,setUserCard]=useState(false);
-
-
-   
-    const saveProfile=async()=>{
+const Profile = ({userData,profile}) => {
   
-     try{
-      setUserCard(false);
-      const requestData={firstName,lastName,gender,age,photourl,skills,about}
-      console.log("req data " , requestData);
-      const res=await axios.post("http://localhost:7777/profile/edit", 
-     requestData,
-     { 
-      withCredentials: true, 
-      headers: { "Content-Type": "application/json" } 
-    }
-      );
-      console.log("data......" , requestData);
-      setUserCard(true);
-            toast.success(res.data.message);
-         dispatch(addUser(res?.data?.data));
-        
-        }
-        catch(err){
-            toast.error(err.response ? err.response.data : err.message);
-        }
-      
-    }
-    
  
-   
   return (
     <>
-    <ToastContainer/>
-<div className=" h-300 flex justify-center">
-      <div className="flex justify-center mx-10 ">
-        <div className="card bg-base-content text-white w-96 shadow-xl ">
-          <div className="card-body">
-            <h2 className="card-title justify-center">Edit Profile</h2>
-            <div>
-              <label className="form-control w-full max-w-xs my-2">
-                <div className="label ">
-                  <span className="label-text text-white">FirstName</span>
-                </div>
-                <input
-                  type="text"
-                  value={firstName}
-                  className="input input-bordered w-full max-w-xs text-black"
-                  onChange={(e)=>setFirstName(e.target.value)}
-                />
-              </label>
-              <label className="form-control w-full max-w-xs my-2">
-                <div className="label ">
-                  <span className="label-text text-white">LastName</span>
-                </div>
-                <input
-                  type="text"
-                  value={lastName}
-                  className="input input-bordered w-full max-w-xs text-black"
-                  onChange={(e)=>setLastName(e.target.value)}
-                />
-              </label>
-
-              <label className="form-control w-full max-w-xs my-2">
-                <div className="label ">
-                  <span className="label-text text-white">Skills</span>
-                </div>
-                <input
-                  type="text"
-                  value={skills}
-                  className="input input-bordered w-full max-w-xs text-black"
-                 onChange={(e)=>setSkills(e.target.value)}
-                />
-              </label>
-              <label className="form-control w-full max-w-xs my-2">
-                <div className="label ">
-                  <span className="label-text text-white">Age</span>
-                </div>
-                <input
-                  type="text"
-                  value={age}
-                  className="input input-bordered w-full max-w-xs text-black"
-                  onChange={(e)=>setAge(e.target.value)}
-                />
-              </label>
-              <label className="form-control w-full max-w-xs my-2">
-                <div className="label ">
-                  <span className="label-text text-white">Gender</span>
-                </div>
-                <input
-                  type="text"
-                  value={gender}
-                  className="input input-bordered w-full max-w-xs text-black"
-                 onChange={(e)=>setGender(e.target.value)}
-                />
-              </label>
-              <label className="form-control w-full max-w-xs my-2">
-                <div className="label ">
-                  <span className="label-text text-white">About</span>
-                </div>
-                <input
-                  type="text"
-                  value={about}
-                  className="input input-bordered w-full max-w-xs text-black"
-                onChange={(e)=>setAbout(e.target.value)}
-                />
-              </label>
-
-              <label className="form-control w-full max-w-xs my-2">
-                <div className="label ">
-                  <span className="label-text text-white">Photo Url</span>
-                </div>
-                
-                <input
-                  type="text"
-                  value={photourl || ""}
-                  className="input input-bordered w-full max-w-xs text-black"
-                  onChange={(e) => setPhotourl(e.target.value)}
-                />
-              </label>
-            </div>
+   {profile &&
+      
+        <div className="flex card bg-base-100 w-96 shadow-xl h-3/5">
+          <figure className="px-10 pt-10">
+           
+              <img
+                src={userData.photourl}
+                alt="User Picture"
+                className="rounded-xl h-64"
+              />
             
-            <div className="card-actions justify-center">
-              <button className="btn btn-primary" onClick={()=>saveProfile()}>
-                Save Profile
-              </button>
-            </div>
+          </figure>
+          <div className="card-body items-center text-center">
+            <h2 className="card-title">{userData.firstName} {userData.lastName}</h2>
+            <p>{Array.isArray(userData.skills) ? userData.skills.join(", ") : userData.skills}</p>
+            <p>{userData.age} {userData.gender}</p>
+            
+            <p>{userData.about}</p>
+
+            
+            
           </div>
         </div>
-      </div>
-      
-      </div>
-    
-    <UserCard userData={{firstName,lastName,gender,age,photourl,skills,about}}  userCard={userCard}/>
-    </>
-  )
 }
+      
+    </>
+  );
+};
 
-export default Profile
-
-
-  
-   
+export default Profile;

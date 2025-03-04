@@ -1,12 +1,12 @@
 import React from 'react'
-import { useState } from 'react'
+
 import { decrement, increment } from '../features/CounterSlice';
 import {useDispatch,useSelector} from 'react-redux';
 
 function counterData() {
    
     const val=useSelector((state)=> state?.counter?.value?? 0);
-    console.log(val);
+  
     const dispatch=useDispatch();
 
    

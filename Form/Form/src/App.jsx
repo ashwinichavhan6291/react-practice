@@ -9,7 +9,7 @@ function App() {
 
  async  function onSubmit(data){
     await new Promise((resolve)=> setTimeout(resolve,5000));
-    console.log("submitting form",data);
+    
   }
 return (
   <>

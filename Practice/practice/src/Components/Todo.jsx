@@ -14,16 +14,16 @@ function Todo(){
       let store=[...data,val];
       setData(store);
       setVal("");
-      // console.log(val);
+   
     }
     
     const deleteVal=(index)=>{
-    console.log(index);
-    console.log("Before delete:", data);  
+    
+    
     let dataFilter=data.filter((cumEle,id)=>{
       return id!==index;
     })
-    console.log("After delete:", dataFilter); 
+    
     setData(dataFilter);
     }
     

@@ -9,12 +9,7 @@ function App() {
     formState: { errors,isSubmitting },
   } = useForm();
 
-// async function SubmitOnClick(data){
-//     await new Promise((resolve)=> setTimeout(resolve,2000));
-//     console.log("submitting form",data);
-//     alert('Your application is updated.');
 
-//    }
 
 function SubmitOnClick(data){
   console.log("submitting data",data);

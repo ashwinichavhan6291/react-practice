@@ -10,7 +10,7 @@ import axios from 'axios';
 function Post() {
 
   const posts=useSelector((store)=>store.getPostData);
-  console.log("posts" ,posts);
+ 
 const dispatch=useDispatch();
 
   const getPost=async()=>{
@@ -18,10 +18,10 @@ const dispatch=useDispatch();
     const res=await axios.get("http://localhost:7777/getPost",{
       withCredentials:true
     });
-    console.log("response" , res);
+ 
     
     dispatch(addData(res.data))
-    console.log("res",res.data);
+   
 
   }
 
@@ -34,7 +34,7 @@ const dispatch=useDispatch();
       const res=await axios.delete(`http://localhost:7777/deletePost/${_id}`,
         {withCredentials:true}
       );
-      console.log(res.data);
+      
       dispatch(removeData({_id}));
 
 
@@ -59,7 +59,7 @@ const dispatch=useDispatch();
            <div key={post._id} className="card bg-base-100 w-96 shadow-xl"     style={{top: "100px" }}>
            <figure>
                <img
-               src={post.postImage} style={{height: "250px",width:"100%"}}
+               src={post.postImage} style={{height: "300px",width:"100%"}}
                alt="Shoes" />
              </figure>
       <div className="card-body">

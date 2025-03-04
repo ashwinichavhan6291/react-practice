@@ -38,8 +38,11 @@ function CreatePost() {
       setPostImage("");
       navigate("/post")
     } catch (err) {
-      console.error("Error:", err.message);
-      toast.error("failed to create post")
+      
+       toast.error( err.response && err.response.data && err.response.data.error
+                        ? err.response.data.error
+                        : err.message
+                    );
     
     }
     

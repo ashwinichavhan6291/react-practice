@@ -3,7 +3,7 @@ import React from "react";
 
 
 const Child=React.memo((props)=>{
-    console.log("child Componets");
+    
 
     return(
         <>

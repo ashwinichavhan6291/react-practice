@@ -13,9 +13,7 @@ const useToggle =(defaultValue)=>{
         }
         
     }
-    useEffect(()=>{
-        console.log(data);
-    },[data]);
+    
     
     return [data,toggleValue];
 }
