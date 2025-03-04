@@ -18,7 +18,7 @@ function Login() {
     try {
       const response = await axios.post("http://localhost:7777/login", data, {
         withCredentials: true,
-      });
+      }); 
 
       dispatch(addUser(response.data));
       setEmailId(data.emailId);

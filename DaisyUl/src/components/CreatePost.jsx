@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../slice/postSlice";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +53,7 @@ function CreatePost() {
     <>
      
       <ToastContainer />
-
+      
       <div style={{ backgroundColor: "grey", height: "100vh" }}>
         <form onSubmit={createPost} className="createPost">
           <div className="createPostContainer">
@@ -94,7 +95,7 @@ function CreatePost() {
             <br />
           </div>
           <button
-            className="btn btn-active btn-primary"
+            className="btn btn-ghost bg-teal-600"
             type="submit"
             style={{ marginLeft: "30%", marginTop: "20px" }}
           >
@@ -102,6 +103,7 @@ function CreatePost() {
           </button>
         </form>
       </div>
+    
     </>
   );
 }

@@ -36,9 +36,9 @@
     .createPost {
         background-color: white;
     top: 4rem;
-        left: 40%; 
+        left: 30%; 
         position: absolute;
-      margin: 30px;
+      margin: 25px;
         width:450px;
         height: 500px;
         border: 2px solid black;

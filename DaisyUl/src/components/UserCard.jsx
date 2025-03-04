@@ -1,102 +1,82 @@
 import axios from 'axios';
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFeed, removeFeed } from '../slice/feedSlice';
 import { ToastContainer, toast } from "react-toastify";
+import { motion, AnimatePresence } from 'framer-motion';
 
 function UserCard() {
-    let[currIndex,setCurrIndex]=useState(0);
+    let [currIndex, setCurrIndex] = useState(0);
+    const feeds = useSelector((store) => store.feed);
+    const dispatch = useDispatch();
 
-    const feeds=useSelector((store)=>store.feed);
-    
-const dispatch=useDispatch();
+    const handleFeed = async () => {
+        try {
+            const res = await axios.get("http://localhost:7777/feed", { withCredentials: true });
+            dispatch(addFeed(res.data.data));
+            console.log(res.data.data);
+        } catch (err) {
+            console.error(err.response ? err.response.data : err.message);
+        }
+    };
 
-const handleFeed=async()=>{
- try{
-      
-    const res=await axios.get("http://localhost:7777/feed",
-        
-        {withCredentials : true}
-    )
-    dispatch(addFeed(res.data.data));
-  
- }
- catch(err){
-    console.error(err.reponse? err.response.data :err.message)
- }
-}
-useEffect(()=>{
-    handleFeed();
-},[]);
+    useEffect(() => {
+        handleFeed();
+    }, []);
 
-
-
-    const handleRequest=async(status,userId)=>{
-       
-        try{
-
+    const handleRequest = async (status, userId) => {
+        try {
             const res = await axios.post(
                 `http://localhost:7777/request/send/${status}/${userId}`,
                 {},
-                {
-                    headers: { "Content-Type": "application/json" },
-                    withCredentials: true 
-                }
+                { headers: { "Content-Type": "application/json" }, withCredentials: true }
             );
-            
             toast.success(res.data.message);
-            
             dispatch(removeFeed(userId));
-
+        } catch (err) {
+            toast.error(err.response && err.response.data && err.response.data.error ? err.response.data.error : err.message);
         }
-        catch(err){
-          toast.error( err.response && err.response.data && err.response.data.error
-                          ? err.response.data.error
-                          : err.message
-                      );
-        }
-    }
-    const handleUser=()=>{
-        setCurrIndex((prev)=>(prev+1) % feeds.length);
-    }
+    };
 
-    if(currIndex>=feeds.length) return <p> no more users</p>
-    const feed=feeds[currIndex];
-  return (
-    <>
-    <ToastContainer/>
+    const handleUser = () => {
+        setCurrIndex((prev) => (prev + 1) % feeds.length);
+    };
 
-    <div className="flex card bg-base-100 w-96 shadow-xl h-3/5 left-1/3 top-16 " key={feed._id}>
-          <figure className="px-10 pt-10">
-           
-              <img
-                src={feed.photourl}
-                alt="User Picture"
-                className="rounded-xl h-64"
-              />
-            
-          </figure>
-          <div className="card-body items-center text-center">
-            <h2 className="card-title">{feed.firstName}</h2>
-            <p>{feed.skills}</p>
-            <p>{feed. gender} {feed.age}</p>
-            
-            <p>{feed.about}</p>
+    if (currIndex >= feeds.length) return <p className="text-center text-gray-500">No more users</p>;
+    const feed = feeds[currIndex];
 
-            <div className=''>
-              <button className='btn bg-slate-400'  onClick={()=>handleRequest("interested", feed._id)}> Interest </button>
-              <button className=' btn ml-6 bg-slate-400' onClick={()=>handleRequest("ignored", feed._id)}> ignored </button>
-
-              <button className='btn bg-slate-400 ml-6'  onClick={handleUser}>Next </button>
+    return (
+        <>
+            <ToastContainer />
+            <div className="flex justify-center items-center h-screen ml-64">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={feed._id}
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -50 }}
+                        transition={{ duration: 0.5 }}
+                        className="bg-white rounded-2xl shadow-lg p-6 text-center w-96 border border-gray-300"
+                    >
+                        <figure className="mb-4">
+                            <img src={feed.photourl} alt="User Picture" className="rounded-xl h-64 object-cover w-full" />
+                        </figure>
+                        <div className="space-y-2">
+                            <h2 className="text-xl font-bold text-gray-800">{feed.firstName} {feed.lastName}</h2>
+                            <p className="text-gray-600 font-medium">{feed.skills}</p>
+                            <p className="text-gray-500">{feed.gender} • {feed.age}</p>
+                            <p className="text-sm text-gray-500">{feed.about}</p>
+                        </div>
+                        <div className='mt-4 flex space-x-4'>
+                            <button className='px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-600 transition' onClick={() => handleRequest("interested", feed._id)}>Interest</button>
+                            <button className='px-4 py-2 bg-pink-400 text-white rounded-lg hover:bg-pink-600 transition' onClick={() => handleRequest("ignored", feed._id)}>Ignore</button>
+                            <button className='px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition' onClick={handleUser}>Next</button>
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
             </div>
-            
-          </div>
-        </div>
-
-
-      
-    </>
-  )
+        </>
+    );
 }
 
-export default UserCard
+export default UserCard;
