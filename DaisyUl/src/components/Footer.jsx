@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-   <div className='footerContainer'>
+   <div className='w-screen'>
    <footer className="footer bg-neutral text-neutral-content items-center p-4">
   <aside className="grid-flow-col items-center">
     <svg

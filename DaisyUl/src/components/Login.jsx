@@ -100,7 +100,7 @@ function Login() {
             <p>
               Forget password?{" "}
               <Link
-                className="btn btn-ghost text-blue-950"
+                className=" btn-ghost text-pink-700"
                 onClick={(e) => {
                   e.preventDefault();
                   setPasswordPage(true);

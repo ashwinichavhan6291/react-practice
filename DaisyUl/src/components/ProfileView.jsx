@@ -18,7 +18,7 @@ function ProfileView() {
      
     toast.error( err.response && err.response.data && err.response.data.error
       ? err.response.data.error
-      : err.message
+      : err.message,{ autoClose: 1000 }
   )
     }
   }
