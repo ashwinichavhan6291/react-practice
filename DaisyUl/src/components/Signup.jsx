@@ -20,7 +20,7 @@ const Signup = () => {
   const handleOnSubmit = async (formData) => {
     try {
       const res = await axios.post( Base_URL+"/signup", formData, {
-        credentials: "include",
+        withCredentials:true,
       });
       dispatch(addUser(res.data));
       toast.success(res.data);
