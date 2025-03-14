@@ -9,20 +9,6 @@ import About from './Components/About/About.jsx'
 import Contact from './Components/Contact/Contact.jsx'
 import User from './Components/User/User.jsx'
 import GitHub, { githubLoader } from './Components/GitHub/GitHub.jsx'
-
-
-
-// const router=createBrowserRouter([
-//   {
-//     path: "/" ,element : <App/>,
-//     children :[
-//       { path :"/", element : <Home/>},
-//       {path : "about" , element : <About/>},
-//       {path : "contact-us" , element : <Contact/>}
-//     ]
-//   }
-// ]);
-
 const router=createBrowserRouter(
   createRoutesFromElements (
  <Route path='/' element ={<App/>}>
