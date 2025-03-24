@@ -13,15 +13,9 @@ function App() {
       <motion.div  
       className='w-32 h-32 mt-10 bg-gray-300' 
       
-      animate={{x:[0,800,800,0,0],
-        y:[0,0,300,300,0],
-        rotate:[0,360,-360,0]
-      
- }} transition={{
-  duration:4,
-  delay:2,
-  
- }}
+  whileHover={{background:"gray"}}
+  whileTap={{scale:0.7}}
+whileInView={{background:"red"}}
  >
        
       </motion.div>
