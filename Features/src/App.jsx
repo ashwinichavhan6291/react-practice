@@ -5,9 +5,6 @@ import useToggle from './Components/useToggle';
 import SearchText from './Components/SearchText';
 import Button from './Components/button';
 
-
-
-
 function App() {
 
   let[val,toggleval]=useToggle(true);
