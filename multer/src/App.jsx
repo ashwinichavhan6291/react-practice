@@ -8,13 +8,13 @@ function App() {
     try{
       const formData=new FormData();
       formData.append('file',file);
-      const res=await axios.post("http://localhost:8000/upload",
-        formData,{withCredentials:true}
-      )
-      
-    }
+      axios.post('http://localhost:8000/upload', {formData}, {
+        withCredentials: true,
+        headers: { 'Content-Type': 'multipart/form-data' }
+    })
+      console.log(res);    }
     catch(err){
-      console.log(err);
+      console.log(err.response.data);
     }
     
   }
