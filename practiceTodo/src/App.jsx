@@ -8,26 +8,33 @@ let[editIndex,setEditIndex]=useState(null);
 
 const addOnClick= () => {
 
-  if(editIndex!=null){
-    const updatedData=[val];
-    setData(updatedData)
+  if(editIndex!==null){
+    const updatedData=[...data];
+    updatedData[editIndex]=val;
     console.log("updatedData" , updatedData);
+ setData(updatedData);
+ setEditIndex(null);
+
+  
   }
- const item=[val];
- setData(item);
- setVal("");
+  else{
+    const item=[...data,val];
+    setData(item);
+    setVal("");
+  }
+
 
 };
 
 const EditButton=(index)=>{
-  setVal(data);
+  const editData=setVal(data[index]);
   setEditIndex(index)
 
 }
+
 const deleteItem=(index)=>{
   const deleteTodo=data.filter((_,id)=>id!==index);
   setData(deleteTodo);
-
 
 }
 
@@ -51,7 +58,7 @@ const deleteItem=(index)=>{
             <li className='flex  mt-5 w-full bg-amber-200 p-3 list-none text-xl font-semibold'>{value}
             <div className='ml-56 space-x-4'>
               <button className='bg-red-400 rounded-lg p-2 cursor-pointer' onClick={()=>deleteItem(index)}>Delete</button>
-              <button  className='bg-blue-400 rounded-lg p-2 cursor-pointer' onClick={EditButton}>Edit</button>
+              <button  className='bg-blue-400 rounded-lg p-2 cursor-pointer' onClick={()=>EditButton(index)}>Edit</button>
               </div>
             </li>
              
